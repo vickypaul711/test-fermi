@@ -1,0 +1,17 @@
+@import './tokens/tokens.css';
+@import './themes/light.css';
+@import './themes/dark.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
