@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* ---------- SCROLL ---------- */
+
+.tableContainer {
+  overflow: auto;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+}
+
+/* ---------- TABLE ---------- */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* forces horizontal scroll */
+}
+
+/* ---------- HEADER ---------- */
+
+thead th {
+  position: sticky;
+  top: 0;
+  background: var(--color-surface);
+  text-align: left;
+  padding: var(--space-sm);
+  border-bottom: 1px solid var(--color-neutral-200);
+}
+
+/* ---------- BODY ---------- */
+
+tbody td {
+  padding: var(--space-sm);
+  border-bottom: 1px solid var(--color-neutral-100);
+}
+
+/* Alternating rows */
+tbody tr:nth-child(even) {
+  background: var(--color-neutral-50);
+}
+
+/* Hover */
+tbody tr:hover {
+  background: var(--color-neutral-100);
+}
+
+/* ---------- STICKY COLUMN ---------- */
+
+.stickyColumn {
+  position: sticky;
+  left: 0;
+  background: var(--color-surface);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ---------- PAGINATION ---------- */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination button {
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-neutral-300);
+  background: var(--color-surface);
+  cursor: pointer;
+}
