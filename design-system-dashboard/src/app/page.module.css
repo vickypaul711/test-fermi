@@ -140,3 +140,24 @@ a.secondary {
     --button-secondary-border: #1a1a1a;
   }
 }
+
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
