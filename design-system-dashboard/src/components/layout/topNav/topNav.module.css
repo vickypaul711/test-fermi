@@ -1,0 +1,33 @@
+.topnav {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 var(--space-md);
+
+  border-bottom: 1px solid var(--color-neutral-200);
+  background: var(--color-surface);
+}
+
+.center {
+  font-weight: var(--font-weight-semibold);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
