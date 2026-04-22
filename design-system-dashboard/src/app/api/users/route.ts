@@ -22,10 +22,26 @@ export async function GET(req: NextRequest) {
   const page = Number(searchParams.get('page') || 1);
   const limit = Number(searchParams.get('limit') || 10);
   const search = searchParams.get('search') || '';
+  const sort = searchParams.get('sort');
+  const order = searchParams.get('order') || 'asc';
 
   let filtered = users.filter((u) =>
     u.name.toLowerCase().includes(search.toLowerCase())
   );
+
+  if (sort) {
+    if (!['name', 'email', 'role'].includes(sort || '')) {
+      return
+    }
+    filtered = filtered.sort((a: any, b: any) => {
+      const valA = a[sort as keyof typeof a];
+      const valB = b[sort as keyof typeof b];
+
+      if (valA < valB) return order === 'asc' ? -1 : 1;
+      if (valA > valB) return order === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
 
   const totalItems = filtered.length;
   const totalPages = Math.ceil(totalItems / limit);
