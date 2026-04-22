@@ -1,48 +1,89 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './dataTable.module.css';
 
-const data = [
-  { name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
-  { name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Inactive' },
-  { name: 'Alex Brown', email: 'alex@example.com', role: 'Editor', status: 'Active' },
-  { name: 'Chris Green', email: 'chris@example.com', role: 'User', status: 'Active' },
-  { name: 'Sam White', email: 'sam@example.com', role: 'Admin', status: 'Inactive' },
-  { name: 'Mike Black', email: 'mike@example.com', role: 'User', status: 'Active' },
-  { name: 'Sara Blue', email: 'sara@example.com', role: 'Editor', status: 'Active' },
-  { name: 'Tom Gray', email: 'tom@example.com', role: 'User', status: 'Inactive' },
-];
-
 export default function DataTable() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const page = Number(searchParams.get('page') || 1);
+  const search = searchParams.get('search') || '';
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchInput, setSearchInput] = useState(search);
+
+  function updateQuery(params: Record<string, string | number>) {
+    const newParams = new URLSearchParams(searchParams.toString());
+
+    Object.entries(params).forEach(([key, value]) => {
+      newParams.set(key, String(value));
+    });
+
+    router.push(`?${newParams.toString()}`);
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+
+      const res = await fetch(
+        `/api/users?page=${page}&search=${search}`
+      );
+
+      const json = await res.json();
+      setData(json.data);
+      setLoading(false);
+    }
+
+    fetchData();
+  }, [page, search]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      updateQuery({ search: searchInput, page: 1 });
+    }, 300);
+
+    return () => clearTimeout(timeout);
+  }, [searchInput]);
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.tableContainer}>
-        <table className={styles.table}>
-          <thead>
+    <div>
+      <input
+        placeholder="Search users..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
+
+      <table className={styles.table}>
+        <tbody>
+          {loading ? (
             <tr>
-              <th>Name ↑</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
+              <td>Loading...</td>
             </tr>
-          </thead>
-
-          <tbody>
-            {data.map((row, i) => (
-              <tr key={i}>
-                <td className={styles.stickyColumn}>{row.name}</td>
+          ) : data.length === 0 ? (
+            <tr>
+              <td>No results</td>
+            </tr>
+          ) : (
+            data.map((row: any) => (
+              <tr key={row.id}>
+                <td>{row.name}</td>
                 <td>{row.email}</td>
-                <td>{row.role}</td>
-                <td>{row.status}</td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            ))
+          )}
+        </tbody>
+      </table>
 
-      <div className={styles.pagination}>
-        <button>Previous</button>
-        <span>1 2 3</span>
-        <button>Next</button>
-      </div>
+      <button onClick={() => updateQuery({ page: page - 1 })}>
+        Prev
+      </button>
+      <button onClick={() => updateQuery({ page: page + 1 })}>
+        Next
+      </button>
     </div>
   );
 }
