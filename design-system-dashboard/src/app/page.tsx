@@ -4,10 +4,10 @@ import styles from './page.module.css';
 import DataTable from '@/components/dashboard/dataTable/dataTable';
 import { headers } from 'next/headers';
 
-const headersList = await headers();
-const host = headersList.get('host');
-
 async function getStats() {
+  const headersList = await headers();
+  const host = headersList.get('host');
+
   const res = await fetch(`http://${host}/api/stats`, {
     cache: 'no-store',
   });
