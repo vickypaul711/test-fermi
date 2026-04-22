@@ -15,3 +15,13 @@ html, body {
   background: var(--color-background);
   color: var(--color-text-primary);
 }
+
+html {
+  transition: background var(--transition-medium),
+              color var(--transition-medium);
+}
+
+body {
+  transition: background var(--transition-medium),
+              color var(--transition-medium);
+}

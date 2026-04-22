@@ -1,3 +1,13 @@
 :root {
-  /* light theme tokens */
+  color-scheme: light;
+
+  --color-background: var(--color-neutral-50);
+  --color-surface: #ffffff;
+  --color-surface-elevated: #ffffff;
+
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-disabled: var(--color-neutral-400);
+
+  --color-primary: #3b82f6;
 }
