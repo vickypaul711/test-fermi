@@ -1,0 +1,23 @@
+.header {
+  margin-bottom: var(--space-lg);
+}
+
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-xs);
+}
+
+
+.tableSection {
+  margin-top: var(--space-md);
+  color: var(--color-text-primary);
+}

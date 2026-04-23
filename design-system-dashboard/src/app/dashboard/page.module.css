@@ -1,0 +1,11 @@
+.grid {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: repeat(4, 1fr);
+
+  container-type: inline-size;
+}
+
+.section {
+  margin-top: var(--space-xl);
+}
