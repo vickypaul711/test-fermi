@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import styles from './sidebar.module.css';
 import clsx from 'clsx';
 
@@ -11,9 +12,15 @@ export default function Sidebar({ collapsed }: { collapsed: boolean }) {
       <div className={styles.logo}>App</div>
 
       <nav className={styles.nav}>
-        <div className={styles.item}>Dashboard</div>
-        <div className={styles.item}>Analytics</div>
-        <div className={styles.item}>Users</div>
+        <Link href="/dashboard" className={styles.item}>
+          <span>Dashboard</span>
+        </Link>
+        <Link href="/analytics" className={styles.item}>
+          <span>Analytics</span>
+        </Link>
+        <Link href="/users" className={styles.item}>
+          <span>Users</span>
+        </Link>
       </nav>
     </aside>
   );
