@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './dataTable.module.css';
+import { useDebounce } from '@/lib/hooks/useDebounce';
 
 interface User {
   id: number;
@@ -22,8 +23,11 @@ export default function DataTable() {
 
   const [data, setData] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [searchInput, setSearchInput] = useState(search);
   const [totalPages, setTotalPages] = useState(1);
+
+  const debouncedSearch = useDebounce(searchInput, 300);
 
   function updateQuery(params: Record<string, string | number>) {
     const newParams = new URLSearchParams(searchParams.toString());
@@ -32,7 +36,7 @@ export default function DataTable() {
       newParams.set(key, String(value));
     });
 
-    router.push(`?${newParams.toString()}`);
+    router.replace(`?${newParams.toString()}`);
   }
 
   function handleSort(column: string) {
@@ -51,35 +55,39 @@ export default function DataTable() {
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
+      try {
+        setLoading(true);
+        setError('');
 
-      const res = await fetch(
-        `/api/users?page=${page}&search=${search}&sort=${sort}&order=${order}`
-      );
+        const res = await fetch(
+          `/api/users?page=${page}&search=${search}&sort=${sort}&order=${order}`
+        );
 
-      const json = await res.json();
+        if (!res.ok) throw new Error('Failed to fetch users');
 
-      setData(json.data);
-      setTotalPages(json.meta?.totalPages || 1);
+        const json = await res.json();
 
-      setLoading(false);
+        setData(json.data);
+        setTotalPages(json.meta?.totalPages || 1);
+      } catch (err) {
+        setError('Something went wrong');
+      } finally {
+        setLoading(false);
+      }
     }
 
     fetchData();
   }, [page, search, sort, order]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      updateQuery({ search: searchInput, page: 1 });
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, [searchInput]);
+    updateQuery({ search: debouncedSearch, page: 1 });
+  }, [debouncedSearch]);
 
   return (
     <div>
       <input
         placeholder="Search users..."
+        id="search-users"
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
       />
@@ -102,9 +110,15 @@ export default function DataTable() {
             <tr>
               <td colSpan={3}>Loading...</td>
             </tr>
+          ) : error ? (
+            <tr>
+              <td colSpan={3}>{error}</td>
+            </tr>
           ) : data.length === 0 ? (
             <tr>
-              <td colSpan={3}>No results found</td>
+              <td colSpan={3}>
+                No users found for "<strong>{search}</strong>"
+              </td>
             </tr>
           ) : (
             data.map((row) => (
@@ -118,9 +132,9 @@ export default function DataTable() {
         </tbody>
       </table>
 
-      <div>
+      <div className={styles.pagination}>
         <button
-          disabled={page <= 1}
+          disabled={page <= 1 || loading}
           onClick={() => updateQuery({ page: page - 1 })}
         >
           Prev
@@ -131,7 +145,7 @@ export default function DataTable() {
         </span>
 
         <button
-          disabled={page >= totalPages}
+          disabled={page >= totalPages || loading}
           onClick={() => updateQuery({ page: page + 1 })}
         >
           Next
