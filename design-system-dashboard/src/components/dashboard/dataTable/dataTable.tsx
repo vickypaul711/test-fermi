@@ -6,10 +6,12 @@ import styles from './dataTable.module.css';
 import { useDebounce } from '@/lib/hooks/useDebounce';
 
 interface User {
+  status: 'Active' | 'Inactive';
+  createdAt: string;
   id: number;
   name: string;
   email: string;
-  role: string;
+  role: 'Admin' | 'User';
 }
 
 export default function DataTable() {
@@ -91,46 +93,59 @@ export default function DataTable() {
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
       />
-
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th onClick={() => handleSort('name')}>
-              Name {sort === 'name' ? (order === 'asc' ? '↑' : '↓') : ''}
-            </th>
-            <th>Email</th>
-            <th onClick={() => handleSort('role')}>
-              Role {sort === 'role' ? (order === 'asc' ? '↑' : '↓') : ''}
-            </th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {loading ? (
-            <tr>
-              <td colSpan={3}>Loading...</td>
-            </tr>
-          ) : error ? (
-            <tr>
-              <td colSpan={3}>{error}</td>
-            </tr>
-          ) : data.length === 0 ? (
-            <tr>
-              <td colSpan={3}>
-                No users found for "<strong>{search}</strong>"
-              </td>
-            </tr>
-          ) : (
-            data.map((row) => (
-              <tr key={row.id}>
-                <td className={styles.stickyColumn}>{row.name}</td>
-                <td>{row.email}</td>
-                <td>{row.role}</td>
+      <div className={styles.wrapper}>
+        <div className={styles.tableContainer}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th onClick={() => handleSort('name')}>
+                  Name {sort === 'name' ? (order === 'asc' ? '↑' : '↓') : ''}
+                </th>
+                <th>Email</th>
+                <th onClick={() => handleSort('role')}>
+                  Role {sort === 'role' ? (order === 'asc' ? '↑' : '↓') : ''}
+                </th>
+                <th>
+                  Status
+                </th>
+                <th>
+                  CreatedAt
+                </th>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            </thead>
+
+            <tbody>
+              {loading ? (
+                <tr>
+                  <td colSpan={3}>Loading...</td>
+                </tr>
+              ) : error ? (
+                <tr>
+                  <td colSpan={3}>{error}</td>
+                </tr>
+              ) : data.length === 0 ? (
+                <tr>
+                  <td colSpan={3}>
+                    No users found for "<strong>{search}</strong>"
+                  </td>
+                </tr>
+              ) : (
+                data.map((row) => (
+                  <tr key={row.id}>
+                    <td>{row.id}</td>
+                    <td>{row.name}</td>
+                    <td>{row.email}</td>
+                    <td>{row.role}</td>
+                    <td>{row.status}</td>
+                    <td>{row.createdAt}</td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+      </div>
 
       <div className={styles.pagination}>
         <button

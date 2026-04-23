@@ -6,6 +6,10 @@ const users = Array.from({ length: 50 }, (_, i) => ({
   name: `User ${i}`,
   email: `user${i}@example.com`,
   role: i % 2 === 0 ? 'Admin' : 'User',
+  status: i % 3 === 0 ? 'Active' : 'Inactive',
+  createdAt: new Date(
+    Date.now() - i * 86400000
+  ).toISOString().split('T')[0],
 }));
 
 function delay() {
