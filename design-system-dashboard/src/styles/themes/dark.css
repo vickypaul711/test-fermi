@@ -2,7 +2,8 @@
   color-scheme: dark;
 
   --color-background: var(--color-neutral-900);
-  --color-surface: var(--color-neutral-800);
+  --color-surface: #111111;
+  --color-surface-secondary: #1a1a1a;
   --color-surface-elevated: var(--color-neutral-700);
 
   --color-text-primary: var(--color-neutral-50);
@@ -10,4 +11,6 @@
   --color-text-disabled: var(--color-neutral-500);
 
   --color-primary: var(--color-primary-light);
+
+  --color-hover: #1f2937;
 }

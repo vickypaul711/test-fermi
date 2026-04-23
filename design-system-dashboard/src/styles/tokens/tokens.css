@@ -44,13 +44,11 @@
 
   /* ----- SPACING ----- */
 
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-2xl: 48px;
-  --space-3xl: 64px;
+  --space-xs: clamp(4px, 0.5vw, 6px);
+  --space-sm: clamp(8px, 0.8vw, 12px);
+  --space-md: clamp(12px, 1vw, 16px);
+  --space-lg: clamp(16px, 1.5vw, 24px);
+  --space-xl: clamp(24px, 2vw, 32px);
 
   /* ----- TYPOGRAPHY ----- */
 
@@ -58,12 +56,12 @@
   --font-family-heading: system-ui, -apple-system, sans-serif;
   --font-family-mono: monospace;
 
-  --font-size-xs: 12px;
-  --font-size-sm: 14px;
-  --font-size-md: 16px;
-  --font-size-lg: 18px;
-  --font-size-xl: 20px;
-  --font-size-2xl: 24px;
+  --font-size-xs: clamp(12px, 0.8vw, 14px);
+  --font-size-sm: clamp(14px, 1vw, 16px);
+  --font-size-md: clamp(16px, 1.2vw, 18px);
+  --font-size-lg: clamp(18px, 1.5vw, 22px);
+  --font-size-xl: clamp(20px, 2vw, 28px);
+  --font-size-2xl: clamp(24px, 2.5vw, 36px);
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
