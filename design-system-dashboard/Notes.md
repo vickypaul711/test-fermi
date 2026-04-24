@@ -194,7 +194,7 @@ Due to time constraints, a few areas were simplified:
 * No automated tests were included
 * The design system does not include full documentation or tooling
 
-With more time (additional ~4 hours), I would:
+With more time , I would:
 
 * Add richer data visualizations
 * Expand table features (multi-column sort, filters)
