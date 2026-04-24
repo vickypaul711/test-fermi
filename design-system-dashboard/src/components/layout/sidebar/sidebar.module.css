@@ -1,25 +1,30 @@
 .sidebar {
-  width: 260px;
+  width: var(--sidebar-width);
   background: var(--color-surface);
-  border-right: 1px solid var(--color-neutral-200);
+  border-right: 1px solid var(--color-border);
 
   transition: width var(--transition-medium);
   overflow: hidden;
+
+  color: var(--color-text-primary);
 }
 
 .collapsed {
-  width: 64px;
+  width: var(--sidebar-collapsed-width);
 }
 
+/* ---------- LOGO ---------- */
 
 .logo {
   padding: var(--space-md);
   font-weight: var(--font-weight-bold);
+
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+/* ---------- NAV ---------- */
 
 .nav {
   display: flex;
@@ -28,6 +33,7 @@
   padding: var(--space-md);
 }
 
+/* ---------- ITEM ---------- */
 
 .item {
   display: flex;
@@ -42,15 +48,18 @@
   overflow: hidden;
 
   text-decoration: none;
+  color: var(--color-text-primary);
+  transition: background var(--transition-fast);
 }
 
 /* Hover */
 .item:hover {
-  background: var(--color-neutral-100);
+  background: var(--color-hover);
 }
 
+/* ---------- COLLAPSED STATE ---------- */
 
-/* Center items when collapsed */
+/* Center items */
 .collapsed .item {
   justify-content: center;
 }
@@ -62,7 +71,7 @@
   overflow: hidden;
 }
 
-/* Optional: hide logo text */
+/* Center logo */
 .collapsed .logo {
   text-align: center;
 }
