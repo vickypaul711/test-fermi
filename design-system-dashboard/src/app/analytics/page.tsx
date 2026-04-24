@@ -9,7 +9,7 @@ interface AnalyticsItem {
 }
 
 async function getAnalytics(): Promise<{ data: AnalyticsItem[] }> {
-  const res = await fetch(`${getBaseUrl()}/api/analytics`, {
+  const res = await fetch(`${await getBaseUrl()}/api/analytics`, {
     cache: 'no-store',
   });
 
