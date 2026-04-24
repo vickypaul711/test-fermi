@@ -91,11 +91,10 @@ export default function DataTable() {
   return (
     <div>
       <Input
-        placeholder="Search users..."
         id="search-users"
         value={searchInput}
-        label=''
-        className={styles.input}
+        label='Search users...'
+        prefix="user:"
         onChange={(e) => setSearchInput(e.target.value)}
       />
       <div className={styles.wrapper}>

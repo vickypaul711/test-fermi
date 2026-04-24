@@ -4,78 +4,113 @@
   gap: var(--space-xs);
 }
 
-/* --------- INPUT CONTAINER --------- */
+/* ---------- CONTAINER ---------- */
 
 .inputContainer {
   position: relative;
+  display: flex;
+  align-items: center;
+  max-width: var(--width-md);
+
+  padding: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-radius: var(--radius-md);
+
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
 }
 
-/* --------- INPUT --------- */
+/* Focus state */
+.inputContainer:focus-within {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 2px var(--color-focus-ring);
+}
+
+/* Error */
+.hasError {
+  border-color: var(--color-danger);
+}
+
+/* Disabled */
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------- INPUT ---------- */
 
 .input {
-  width: 100%;
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-neutral-300);
-
-  font-size: var(--font-size-md);
-  font-family: var(--font-family-body);
-
-  background: var(--color-surface);
-  color: var(--color-text-primary);
-
-  transition: border var(--transition-fast);
-}
-
-.input:focus {
+  flex: 1;
+  border: none;
   outline: none;
-  border-color: var(--color-primary);
+  background: transparent;
+
+  padding: var(--space-md) 0 var(--space-xs) 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-primary);
 }
 
-/* --------- LABEL --------- */
+/* Readonly */
+.input[readonly] {
+  background: var(--color-surface-secondary);
+}
+
+/* ---------- FLOATING LABEL ---------- */
 
 .label {
   position: absolute;
-  left: var(--space-md);
+  left: var(--space-sm);
   top: 50%;
-  transform: translateY(-50%);
+
+  transform: translateY(-50%) scale(1);
+  transform-origin: left center;
 
   color: var(--color-text-secondary);
-  font-size: var(--font-size-md);
-
   pointer-events: none;
 
   transition: transform var(--transition-fast),
-              font-size var(--transition-fast),
               color var(--transition-fast);
 }
 
-/* FLOATING STATE */
-
+/* FLOAT */
 .input:focus + .label,
 .input:not(:placeholder-shown) + .label {
   transform: translateY(-140%) scale(0.85);
-  color: var(--color-primary);
+  color: var(--color-text-primary);
 }
 
-/* --------- ERROR --------- */
+/* ---------- PREFIX / SUFFIX ---------- */
 
-.error {
-  border-color: var(--color-error);
+.prefix,
+.suffix {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md) 0 var(--space-xs) 0;
+  color: var(--color-text-secondary);
 }
 
-/* --------- META --------- */
+/* ---------- META ---------- */
 
 .meta {
   display: flex;
   justify-content: space-between;
-  font-size: var(--font-size-sm);
+  align-items: center;
 }
 
 .helper {
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }
 
+.errorText {
+  color: var(--color-danger);
+}
+
 .counter {
+  font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
 }

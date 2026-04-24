@@ -1,13 +1,15 @@
 'use client';
 
-import styles from './input.module.css';
 import clsx from 'clsx';
+import styles from './input.module.css';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   label: string;
   error?: string;
   helperText?: string;
   maxLength?: number;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
 }
 
 export default function Input({
@@ -15,29 +17,49 @@ export default function Input({
   error,
   helperText,
   maxLength,
+  prefix,
+  suffix,
   value = '',
-  placeholder='',
+  id,
   ...props
 }: InputProps) {
+  const inputId = id || `input-${label.replace(/\s+/g, '-')}`;
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.inputContainer}>
+      <div
+        className={clsx(styles.inputContainer, {
+          [styles.hasError]: error,
+          [styles.disabled]: props.disabled,
+        })}
+      >
+        {prefix && value && <span className={styles.prefix}>{prefix}</span>}
+
         <input
-          className={clsx(styles.input, {
-            [styles.error]: error,
-          })}
+          id={inputId}
           value={value}
           maxLength={maxLength}
+          placeholder=" "
+          className={styles.input}
           {...props}
-          placeholder={placeholder}
         />
-        <label className={styles.label}>{label}</label>
+
+        <label htmlFor={inputId} className={styles.label}>
+          {label}
+        </label>
+
+        {suffix && value && <span className={styles.suffix}>{suffix}</span>}
       </div>
 
       <div className={styles.meta}>
-        <span className={styles.helper}>
+        <span
+          className={clsx(styles.helper, {
+            [styles.errorText]: error,
+          })}
+        >
           {error ? error : helperText}
         </span>
+
         {maxLength && (
           <span className={styles.counter}>
             {String(value).length}/{maxLength}

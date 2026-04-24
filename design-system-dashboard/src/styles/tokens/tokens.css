@@ -86,6 +86,17 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
 
+  /* ------ WIDTH ------- */
+
+  --width-xs: 120px;
+  --width-sm: 200px;
+  --width-md: 320px;
+  --width-lg: 480px;
+  --width-xl: 640px;
+
+  --width-full: 100%;
+  --width-container: 1200px;
+
   /* ----- TRANSITIONS ----- */
 
   --transition-fast: 150ms ease;
