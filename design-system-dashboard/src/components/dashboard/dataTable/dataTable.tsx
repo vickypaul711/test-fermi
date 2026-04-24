@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './dataTable.module.css';
 import { useDebounce } from '@/lib/hooks/useDebounce';
-import { getBaseUrl } from '@/lib/utils/baseUrl';
 
 interface User {
   status: 'Active' | 'Inactive';
@@ -63,7 +62,7 @@ export default function DataTable() {
         setError('');
 
         const res = await fetch(
-          `${getBaseUrl()}/api/users?page=${page}&search=${search}&sort=${sort}&order=${order}`
+          `/api/users?page=${page}&search=${search}&sort=${sort}&order=${order}`
         );
 
         if (!res.ok) throw new Error('Failed to fetch users');
