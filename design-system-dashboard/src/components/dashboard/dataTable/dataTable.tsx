@@ -95,6 +95,7 @@ export default function DataTable() {
         value={searchInput}
         label='Search users...'
         prefix="user:"
+        maxLength={10}
         onChange={(e) => setSearchInput(e.target.value)}
       />
       <div className={styles.wrapper}>

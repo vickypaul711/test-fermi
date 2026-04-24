@@ -27,28 +27,35 @@ export default function Input({
 
   return (
     <div className={styles.wrapper}>
-      <div
-        className={clsx(styles.inputContainer, {
-          [styles.hasError]: error,
-          [styles.disabled]: props.disabled,
-        })}
-      >
-        {prefix && value && <span className={styles.prefix}>{prefix}</span>}
+      <div className={styles.innerWrapper}>
+        <div
+          className={clsx(styles.inputContainer, {
+            [styles.hasError]: error,
+            [styles.disabled]: props.disabled,
+          })}
+        >
+          {prefix && value && <span className={styles.prefix}>{prefix}</span>}
 
-        <input
-          id={inputId}
-          value={value}
-          maxLength={maxLength}
-          placeholder=" "
-          className={styles.input}
-          {...props}
-        />
+          <input
+            id={inputId}
+            value={value}
+            maxLength={maxLength}
+            placeholder=" "
+            className={styles.input}
+            {...props}
+          />
 
-        <label htmlFor={inputId} className={styles.label}>
-          {label}
-        </label>
+          <label htmlFor={inputId} className={styles.label}>
+            {label}
+          </label>
 
-        {suffix && value && <span className={styles.suffix}>{suffix}</span>}
+          {suffix && value && <span className={styles.suffix}>{suffix}</span>}
+        </div>
+        {maxLength && (
+          <span className={styles.counter}>
+            {`${String(value).length}/${maxLength}`}
+          </span>
+        )}
       </div>
 
       <div className={styles.meta}>
@@ -59,12 +66,6 @@ export default function Input({
         >
           {error ? error : helperText}
         </span>
-
-        {maxLength && (
-          <span className={styles.counter}>
-            {String(value).length}/{maxLength}
-          </span>
-        )}
       </div>
     </div>
   );
