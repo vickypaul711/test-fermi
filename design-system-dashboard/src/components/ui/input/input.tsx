@@ -16,6 +16,7 @@ export default function Input({
   helperText,
   maxLength,
   value = '',
+  placeholder='',
   ...props
 }: InputProps) {
   return (
@@ -28,7 +29,7 @@ export default function Input({
           value={value}
           maxLength={maxLength}
           {...props}
-          placeholder=" "
+          placeholder={placeholder}
         />
         <label className={styles.label}>{label}</label>
       </div>

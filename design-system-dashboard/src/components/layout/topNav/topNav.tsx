@@ -1,3 +1,4 @@
+import Button from '@/components/ui/button/button';
 import styles from './topNav.module.css';
 import ThemeToggle from '@/components/ui/themeToggle';
 
@@ -8,7 +9,7 @@ export default function TopNav({
 }) {
   return (
     <header className={styles.topnav}>
-      <button onClick={onToggleSidebar}>☰</button>
+      <Button onClick={onToggleSidebar}>☰</Button>
 
       <div className={styles.center}>Dashboard</div>
 

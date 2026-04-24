@@ -13,4 +13,7 @@
   --color-primary: #3b82f6;
 
   --color-hover: #f3f4f6;
+
+  --color-skeleton-base: var(--color-surface-secondary);
+  --color-skeleton-highlight: var(--color-neutral-200);
 }

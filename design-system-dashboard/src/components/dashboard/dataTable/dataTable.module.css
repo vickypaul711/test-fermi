@@ -90,6 +90,7 @@
 
 .pagination {
   display: flex;
+  margin-top: 20px;
   justify-content: space-between;
   align-items: center;
 }
@@ -105,4 +106,10 @@
 .pagination button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.input {
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }

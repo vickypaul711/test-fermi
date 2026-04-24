@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Button from './button/button';
 
 export default function ThemeToggle() {
   const [theme, setTheme] = useState('light');
@@ -18,5 +19,5 @@ export default function ThemeToggle() {
     localStorage.setItem('theme', newTheme);
   };
 
-  return <button onClick={toggleTheme}>Toggle Theme</button>;
+  return <Button onClick={toggleTheme}>Toggle Theme</Button>;
 }

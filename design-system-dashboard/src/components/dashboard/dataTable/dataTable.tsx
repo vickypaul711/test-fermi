@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './dataTable.module.css';
 import { useDebounce } from '@/lib/hooks/useDebounce';
+import TableSkeleton from './skeleton/skeleton';
+import Button from '@/components/ui/button/button';
+import Input from '@/components/ui/input/input';
 
 interface User {
   status: 'Active' | 'Inactive';
@@ -87,10 +90,12 @@ export default function DataTable() {
 
   return (
     <div>
-      <input
+      <Input
         placeholder="Search users..."
         id="search-users"
         value={searchInput}
+        label=''
+        className={styles.input}
         onChange={(e) => setSearchInput(e.target.value)}
       />
       <div className={styles.wrapper}>
@@ -117,9 +122,7 @@ export default function DataTable() {
 
             <tbody>
               {loading ? (
-                <tr>
-                  <td colSpan={3}>Loading...</td>
-                </tr>
+                <TableSkeleton />
               ) : error ? (
                 <tr>
                   <td colSpan={3}>{error}</td>
@@ -148,23 +151,25 @@ export default function DataTable() {
       </div>
 
       <div className={styles.pagination}>
-        <button
+        <Button
           disabled={page <= 1 || loading}
           onClick={() => updateQuery({ page: page - 1 })}
+          loading={loading}
         >
           Prev
-        </button>
+        </Button>
 
         <span>
           Page {page} / {totalPages}
         </span>
 
-        <button
+        <Button
           disabled={page >= totalPages || loading}
           onClick={() => updateQuery({ page: page + 1 })}
+          loading={loading}
         >
           Next
-        </button>
+        </Button>
       </div>
     </div>
   );
