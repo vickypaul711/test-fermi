@@ -4,7 +4,7 @@ import styles from './page.module.css';
 import AnalyticsCard from '@/components/dashboard/analyticsCard/analyticsCard';
 
 async function getStats() {
-  const res = await fetch('http://localhost:3000/api/stats', {
+  const res = await fetch('/api/stats', {
     cache: 'no-store',
   });
 
@@ -12,7 +12,7 @@ async function getStats() {
 }
 
 async function getAnalytics() {
-  const res = await fetch('http://localhost:3000/api/analytics', {
+  const res = await fetch('/api/analytics', {
     cache: 'no-store',
   });
 
