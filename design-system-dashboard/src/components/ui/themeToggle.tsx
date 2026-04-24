@@ -19,5 +19,5 @@ export default function ThemeToggle() {
     localStorage.setItem('theme', newTheme);
   };
 
-  return <Button onClick={toggleTheme}>Toggle Theme</Button>;
+  return <Button size="small" variant="secondary" onClick={toggleTheme}>{`${theme === 'light' ? 'Dark' : 'Light'} theme`}</Button>;
 }

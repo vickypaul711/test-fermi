@@ -108,8 +108,7 @@
   cursor: not-allowed;
 }
 
-/* .input {
-  padding: 8px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-} */
+.table tbody td.noResults {
+  border-bottom: none;
+  text-align: center;
+}

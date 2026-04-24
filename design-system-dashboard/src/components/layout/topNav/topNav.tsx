@@ -9,7 +9,7 @@ export default function TopNav({
 }) {
   return (
     <header className={styles.topnav}>
-      <Button onClick={onToggleSidebar}>☰</Button>
+      <Button variant="secondary" size="small" onClick={onToggleSidebar}>☰</Button>
 
       <div className={styles.center}>Dashboard</div>
 

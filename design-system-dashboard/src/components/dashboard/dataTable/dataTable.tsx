@@ -128,7 +128,7 @@ export default function DataTable() {
                 </tr>
               ) : data.length === 0 ? (
                 <tr>
-                  <td colSpan={3}>
+                  <td className={styles.noResults} colSpan={99}>
                     No users found for "<strong>{search}</strong>"
                   </td>
                 </tr>
