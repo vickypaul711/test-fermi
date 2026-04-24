@@ -1,6 +1,7 @@
 import DashboardLayout from '@/components/layout/dashboardLayout/dashboardLayout';
 import DataTable from '@/components/dashboard/dataTable/dataTable';
 import styles from './page.module.css';
+import { Suspense } from 'react';
 
 export default function UsersPage() {
   return (
@@ -13,7 +14,9 @@ export default function UsersPage() {
       </div>
 
       <div className={styles.tableSection}>
-        <DataTable />
+        <Suspense fallback={<div>Loading table...</div>}>
+          <DataTable />
+        </Suspense>
       </div>
     </DashboardLayout>
   );
