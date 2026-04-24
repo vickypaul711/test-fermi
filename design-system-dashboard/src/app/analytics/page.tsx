@@ -1,6 +1,7 @@
 import DashboardLayout from '@/components/layout/dashboardLayout/dashboardLayout';
 import AnalyticsCard from '@/components/dashboard/analyticsCard/analyticsCard';
 import styles from './page.module.css';
+import { getBaseUrl } from '@/lib/utils/baseUrl';
 
 interface AnalyticsItem {
   date: string;
@@ -8,7 +9,7 @@ interface AnalyticsItem {
 }
 
 async function getAnalytics(): Promise<{ data: AnalyticsItem[] }> {
-  const res = await fetch('/api/analytics', {
+  const res = await fetch(`${getBaseUrl()}/api/analytics`, {
     cache: 'no-store',
   });
 

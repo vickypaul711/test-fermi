@@ -2,9 +2,10 @@ import StatsCard from '@/components/dashboard/statsCard/statsCard';
 import DashboardLayout from '@/components/layout/dashboardLayout/dashboardLayout';
 import styles from './page.module.css';
 import AnalyticsCard from '@/components/dashboard/analyticsCard/analyticsCard';
+import { getBaseUrl } from '@/lib/utils/baseUrl';
 
 async function getStats() {
-  const res = await fetch('/api/stats', {
+  const res = await fetch(`${getBaseUrl()}/api/stats`, {
     cache: 'no-store',
   });
 
@@ -12,7 +13,7 @@ async function getStats() {
 }
 
 async function getAnalytics() {
-  const res = await fetch('/api/analytics', {
+  const res = await fetch(`${getBaseUrl()}/api/analytics`, {
     cache: 'no-store',
   });
 
